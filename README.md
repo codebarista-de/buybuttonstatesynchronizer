@@ -1,9 +1,9 @@
 # BuyButtonStateSynchronizer
 
-If multiple Shopware plugins modify the disabled state of the buy-button (btn-buy), the plugin that modifies the state last will win.
+If multiple Shopware plugins modify the buy-button's (btn-buy) disabled state, the plugin that modifies the state last will win.
 BuyButtonStateSynchronizer allows multiple plugins to agree with each other on the disabled state of the buy button.
 
-Instead of modifying the disabled state of the buy-button like this:
+Instead of modifying the buy-button's disabled state like this:
 
 ```javascript
 export default class MyPlugin extends Plugin {
@@ -19,7 +19,7 @@ export default class MyPlugin extends Plugin {
 }
 ```
 
-a compatible plugin should modify the buy-button like this:
+a compatible plugin should do this:
 
 ```javascript
 export default class MyPlugin extends Plugin {
