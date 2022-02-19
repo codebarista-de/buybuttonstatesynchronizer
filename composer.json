@@ -1,0 +1,19 @@
+{
+    "name": "zwohansel/buybuttonstatesynchronizer",
+    "version": "1.0.0",
+    "description": "Allows multiple plugins to controll the buy button state.",
+    "type": "shopware-platform-plugin",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "BuyButtonStateSynchronizer\\": "src/"
+        }
+    },
+    "extra": {
+        "shopware-plugin-class": "BuyButtonStateSynchronizer\\BuyButtonStateSynchronizer",
+        "label": {
+            "de-DE": "Buy-Button-State Synchronizer",
+            "en-GB": "Buy-Button-State Synchronizer"
+        }
+    }
+}
