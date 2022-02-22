@@ -1,7 +1,7 @@
 {
     "name": "zwohansel/buybuttonstatesynchronizer",
     "version": "1.0.0",
-    "description": "Allows multiple plugins to controll the buy button state.",
+    "description": "Allows multiple plugins to control the buy button state.",
     "type": "shopware-platform-plugin",
     "license": "MIT",
     "autoload": {
@@ -14,6 +14,10 @@
         "label": {
             "de-DE": "Buy-Button-State Synchronizer",
             "en-GB": "Buy-Button-State Synchronizer"
+        },
+        "description": {
+          "de-DE": "Ermöglicht das sperren bzw. entsperren Kauf-Buttons durch mehrere Plug-ins.",
+          "en-GB": "Allows multiple plugins to control the buy button state."
         }
     }
 }
