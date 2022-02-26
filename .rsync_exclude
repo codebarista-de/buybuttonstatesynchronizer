@@ -1,0 +1,5 @@
+.rsync_exclude
+deploy_dev.sh
+README.md
+.git/
+.gitignore
