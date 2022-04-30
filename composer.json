@@ -4,6 +4,12 @@
     "description": "Allows multiple plugins to control the buy button state.",
     "type": "shopware-platform-plugin",
     "license": "MIT",
+    "authors": [
+      {
+        "name": "ZwoHansel",
+        "homepage": "https://zwohansel.de/"
+      }
+    ],
     "autoload": {
         "psr-4": {
             "BuyButtonStateSynchronizer\\": "src/"
