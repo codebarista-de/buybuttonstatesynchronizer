@@ -4,5 +4,5 @@ const PluginManager = window.PluginManager;
 PluginManager.register(
     "BuyButtonStateSynchronizer",
     BuyButtonStateSynchronizer,
-    "[data-buy-btn-state-synchronizer]"
+    "[data-buy-button-state-synchronizer]"
 );

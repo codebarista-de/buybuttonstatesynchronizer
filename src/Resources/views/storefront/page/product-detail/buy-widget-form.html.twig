@@ -1,11 +1,40 @@
 {% sw_extends '@Storefront/storefront/page/product-detail/buy-widget-form.html.twig' %}
 
+
+{% block page_product_detail_buy_form_inner %}
+    {% if config('BuyButtonStateSynchronizer').config.showDialogInsteadOfDisableButton %}
+        <div id="buy-button-state-synchronizer-modal" class="modal" tabindex="-1" role="dialog" data-backdrop="static">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <p>{{ 'buybuttonstate.product-not-ready' | trans }}</p>
+                    </div>
+                    <div id="buy-button-state-synchronizer-modal-actions" class="modal-footer">
+                        <div id="buy-button-state-synchronizer-modal-cancel-btn">
+                            <button
+                                type="button"
+                                class="btn btn-secondary"
+                                data-dismiss="modal">
+                                {{ 'buybuttonstate.cancel' | trans }}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    {{ parent() }}
+{% endblock %}
+
 {% block page_product_detail_buy_button %}
     <button title="{{ "detail.addProduct"|trans|striptags }}"
             aria-label="{{ "detail.addProduct"|trans|striptags }}"
             class="btn btn-primary btn-block btn-buy"
             disabled
-            data-buy-btn-state-synchronizer>
+            data-buy-button-state-synchronizer
+            data-buy-button-state-synchronizer-options='{
+                "showDialogInsteadOfDisableButton": "{{ config('BuyButtonStateSynchronizer').config.showDialogInsteadOfDisableButton }}"
+            }'>
         {{ "detail.addProduct"|trans|sw_sanitize }}
     </button>
 {% endblock %}

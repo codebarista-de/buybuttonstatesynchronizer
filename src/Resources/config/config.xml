@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/platform/trunk/src/Core/System/SystemConfig/Schema/config.xsd">
+    <card>
+        <title>Buy-Button-State Synchronizer Settings</title>
+        <title lang="de-DE">Buy-Button-State Synchronizer Einstellungen</title>
+
+        <input-field type="bool">
+            <name>showDialogInsteadOfDisableButton</name>
+            <label>Show a dialog instead of disabling the button</label>
+            <label lang="de-DE">Dialog zeigen anstatt button deaktivieren</label>
+            <helpText>If activated, the buy button is never disabled but a dialog is shown instead.</helpText>
+            <helpText lang="de-DE">Wenn diese Option aktiviert ist, wird der "In den Warenkorb" Button nicht deaktiviert. Stattdessen wird ein Dialog angezeigt.</helpText>
+        </input-field>
+    </card>
+</config>
