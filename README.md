@@ -8,6 +8,10 @@ Each plugin can register an action for which a button is rendered in the dialog.
 E.g. if your product requires a file upload and the user has not yet uploaded a file
 but still presses the buy button the dialog can show a "Upload file" button.
 
+If you omit the label, no button will be rendered. If no action with a button label
+is left, no dialog is shown. Instead, when the user presses the buy button, the first
+action that has no label is executed.
+
 Instead of modifying the buy-button's disabled-state like this:
 
 ```javascript
