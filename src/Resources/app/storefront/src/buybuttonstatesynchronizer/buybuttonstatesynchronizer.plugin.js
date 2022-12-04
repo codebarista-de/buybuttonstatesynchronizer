@@ -114,7 +114,7 @@ export default class BuyButtonStateSynchronizer extends Plugin {
     // Prevent form submit by pressing enter if buy button is disabled
     const buyForm = document.getElementById("productDetailPageBuyProductForm");
     buyForm.addEventListener("keydown", (event) => {
-      if (event.code == "Enter") {
+      if (event.code == "Enter" || event.code == "NumpadEnter") {
         return this.onBuyButtonClicked(event);
       }
     })
