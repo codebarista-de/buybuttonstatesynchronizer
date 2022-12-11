@@ -162,7 +162,7 @@ export default class BuyButtonStateSynchronizer extends Plugin {
       if (action.label != null) {
         const actionButton = document.createElement("button");
         actionButton.classList.add("btn", "btn-primary");
-        actionButton.innerText = action.label;
+        actionButton.innerHTML = action.label;
         actionButton.onclick = (e) => {
           $("#buy-button-state-synchronizer-modal").modal("hide");
           action.callback(e);
