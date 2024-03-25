@@ -1,34 +1,39 @@
 {
-    "name": "zwohansel/buybuttonstatesynchronizer",
-    "version": "2.2.0",
+    "name": "codebarista/buybuttonstatesynchronizer",
+    "version": "3.0.0",
     "description": "Allows multiple plugins to control the buy button state.",
     "type": "shopware-platform-plugin",
     "license": "MIT",
     "authors": [
       {
-        "name": "ZwoHansel",
-        "homepage": "https://zwohansel.de/"
+        "name": "Codebarista",
+        "homepage": "https://codebarista.de/"
       }
     ],
     "require": {
-      "shopware/core": "~6.4",
-      "shopware/administration": "~6.4",
-      "shopware/storefront": "~6.4"
+      "shopware/core": "~6.5",
+      "shopware/administration": "~6.5",
+      "shopware/storefront": "~6.5"
     },
     "autoload": {
         "psr-4": {
-            "BuyButtonStateSynchronizer\\": "src/"
+            "Codebarista\\": "src/"
         }
     },
     "extra": {
-        "shopware-plugin-class": "BuyButtonStateSynchronizer\\BuyButtonStateSynchronizer",
+        "shopware-plugin-class": "Codebarista\\BaristaBuyButtonStateSynchronizer",
+        "copyright": "Codebarista",
         "label": {
             "de-DE": "Buy-Button-State Synchronizer",
             "en-GB": "Buy-Button-State Synchronizer"
         },
         "description": {
-          "de-DE": "Ermöglicht das sperren bzw. entsperren Kauf-Buttons durch mehrere Plug-ins.",
+          "de-DE": "Ermöglicht das Sperren bzw. Entsperren des 'In den Warenkorb'-Buttons durch mehrere Plug-ins.",
           "en-GB": "Allows multiple plugins to control the buy button state."
+        },
+        "manufacturerLink": {
+          "de-DE": "https://codebarista.de/",
+          "en-GB": "https://codebarista.de/"
         }
     }
 }
