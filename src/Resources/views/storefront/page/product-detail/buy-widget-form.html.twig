@@ -2,26 +2,24 @@
 
 
 {% block page_product_detail_buy_form_inner %}
-    {% if config('BuyButtonStateSynchronizer').config.showDialogInsteadOfDisableButton %}
-        <div id="buy-button-state-synchronizer-modal" class="modal" tabindex="-1" role="dialog" data-backdrop="static">
-            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <p>{{ 'buybuttonstate.product-not-ready' | trans }}</p>
-                    </div>
-                    <div id="buy-button-state-synchronizer-modal-actions" class="modal-footer">
-                        <div id="buy-button-state-synchronizer-modal-cancel-btn">
-                            <button
-                                type="button"
-                                class="btn btn-secondary"
-                                data-dismiss="modal">
-                                {{ 'buybuttonstate.cancel' | trans }}
-                            </button>
-                        </div>
+    {% if config('BaristaBuyButtonStateSynchronizer').config.showDialogInsteadOfDisableButton %}
+        <dialog id="buy-button-state-synchronizer-modal" data-cancel-btn-label="{{ 'buybuttonstate.cancel' | trans }}">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <p>{{ 'buybuttonstate.product-not-ready' | trans }}</p>
+                </div>
+                <div id="buy-button-state-synchronizer-modal-actions" class="modal-footer">
+                    <div id="buy-button-state-synchronizer-modal-cancel-btn">
+                        <button
+                            type="button"
+                            class="btn btn-secondary"
+                            data-dismiss="modal">
+                            {{ 'buybuttonstate.cancel' | trans }}
+                        </button>
                     </div>
                 </div>
             </div>
-        </div>
+        </dialog>
     {% endif %}
     {{ parent() }}
 {% endblock %}

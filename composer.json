@@ -1,6 +1,6 @@
 {
     "name": "codebarista/buybuttonstatesynchronizer",
-    "version": "3.0.0",
+    "version": "3.0.1",
     "description": "Allows multiple plugins to control the buy button state.",
     "type": "shopware-platform-plugin",
     "license": "MIT",

@@ -117,7 +117,7 @@ export default class BuyButtonStateSynchronizer extends Plugin {
       if (event.code == "Enter" || event.code == "NumpadEnter") {
         return this.onBuyButtonClicked(event);
       }
-    })
+    });
   }
 
   buyButtonNodeChanged() {
@@ -155,46 +155,51 @@ export default class BuyButtonStateSynchronizer extends Plugin {
       return true;
     }
 
-    // Create a button for each registered action
-    const actionButtons = [];
-    for (const actionID in window.buyButtonStateSynchronizerActions) {
-      const action = window.buyButtonStateSynchronizerActions[actionID];
-      if (action.label != null) {
-        const actionButton = document.createElement("button");
-        actionButton.classList.add("btn", "btn-primary");
-        actionButton.innerHTML = action.label;
-        actionButton.onclick = (e) => {
-          $("#buy-button-state-synchronizer-modal").modal("hide");
-          action.callback(e);
-        };
-        actionButtons.push(actionButton);
+    const dialog = document.querySelector(
+      "#buy-button-state-synchronizer-modal"
+    );
+
+    if (dialog) {
+      // Create a button for each registered action
+      const actionButtons = [];
+      for (const actionID in window.buyButtonStateSynchronizerActions) {
+        const action = window.buyButtonStateSynchronizerActions[actionID];
+        if (action.label != null) {
+          const actionButton = document.createElement("button");
+          actionButton.classList.add("btn", "btn-primary");
+          actionButton.innerHTML = action.label;
+          actionButton.onclick = (e) => {
+            dialog.close();
+            action.callback(e);
+          };
+          actionButtons.push(actionButton);
+        }
       }
-    }
-    if (actionButtons.length > 0) {
-      // Preserve the cancel button
-      actionButtons.push(
-        document.getElementById(
-          "buy-button-state-synchronizer-modal-cancel-btn"
-        )
-      );
+      if (actionButtons.length === 0) {
+        // If there is no labled action for which a button in the dialog
+        // can be shown we search for an action that we can invoke
+        for (const actionID in window.buyButtonStateSynchronizerActions) {
+          const action = window.buyButtonStateSynchronizerActions[actionID];
+          if (action.callback != null) {
+            action.callback();
+            e.preventDefault();
+            return false;
+          }
+        }
+      }
+      // Add cancel button
+      const actionButton = document.createElement("button");
+      actionButton.classList.add("btn", "btn-secondary");
+      actionButton.innerHTML = dialog.getAttribute("data-cancel-btn-label");
+      actionButton.onclick = () => dialog.close();
+      actionButtons.push(actionButton);
       // Replace all buttons
       document
         .getElementById("buy-button-state-synchronizer-modal-actions")
         .replaceChildren(...actionButtons);
-    } else {
-      // If there is no labled action for which a button in the dialog
-      // can be shown we search for an action that we can invole
-      for (const actionID in window.buyButtonStateSynchronizerActions) {
-        const action = window.buyButtonStateSynchronizerActions[actionID];
-        if (action.callback != null) {
-          action.callback();
-          e.preventDefault();
-          return false;
-        }
-      }
-    }
 
-    $("#buy-button-state-synchronizer-modal").modal("show");
+      dialog.showModal();
+    }
     e.preventDefault();
     return false;
   }
