@@ -1,0 +1,31 @@
+{% sw_extends '@Storefront/storefront/base.html.twig' %}
+
+{% set buyButtonStateSynchronizerOptions = {
+    showDialogInsteadOfDisableButton: config('BaristaBuyButtonStateSynchronizer').config.showDialogInsteadOfDisableButton
+} %}
+
+{% block base_body_inner %}
+    {{ parent() }}
+    <template data-buy-button-state-synchronizer data-buy-button-state-synchronizer-options='{{ buyButtonStateSynchronizerOptions|json_encode }}'>></template>
+    {% block buy_button_state_synchronizer_dialog %}
+        {% if config('BaristaBuyButtonStateSynchronizer').config.showDialogInsteadOfDisableButton %}
+            <dialog id="buy-button-state-synchronizer-modal" data-cancel-btn-label="{{ 'buybuttonstate.cancel' | trans }}">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <p>{{ 'buybuttonstate.product-not-ready' | trans }}</p>
+                    </div>
+                    <div id="buy-button-state-synchronizer-modal-actions" class="modal-footer">
+                        <div id="buy-button-state-synchronizer-modal-cancel-btn">
+                            <button
+                                type="button"
+                                class="btn btn-secondary"
+                                data-dismiss="modal">
+                                {{ 'buybuttonstate.cancel' | trans }}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </dialog>
+        {% endif %}
+    {% endblock %}
+{% endblock %}

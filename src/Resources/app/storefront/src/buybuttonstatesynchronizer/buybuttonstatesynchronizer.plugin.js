@@ -2,7 +2,7 @@ import Plugin from "src/plugin-system/plugin.class";
 
 export default class BuyButtonStateSynchronizer extends Plugin {
   static options = {
-    showDialogInsteadOfDisableButton: null,
+    showDialogInsteadOfDisableButton: false,
   };
 
   /**
@@ -47,7 +47,7 @@ export default class BuyButtonStateSynchronizer extends Plugin {
    *                                           is left.
    */
   static disableBuyButton(id, actionLabel = null, actionCallback = null) {
-    const buyButton = document.getElementsByClassName("btn-buy").item(0);
+    const buyButton = document.querySelector(".btn-buy");
     if (buyButton == null) {
       console.warn("Cannot disable buy button: No element with class btn-buy");
       return;
@@ -75,7 +75,7 @@ export default class BuyButtonStateSynchronizer extends Plugin {
    * @param {string} id The ID of the vote that is withdrawn.
    */
   static enableBuyButton(id) {
-    const buyButton = document.getElementsByClassName("btn-buy").item(0);
+    const buyButton = document.querySelector(".btn-buy");
     if (buyButton == null) {
       console.warn("Cannot enable buy button: No element with class btn-buy");
       return;
@@ -88,6 +88,15 @@ export default class BuyButtonStateSynchronizer extends Plugin {
   }
 
   init() {
+    const buyForm = document.getElementById("productDetailPageBuyProductForm");
+    if (buyForm == null) {
+      return; // We are not on the product details page
+    }
+    this.buyButton = document.querySelector(".btn-buy");
+    if (this.buyButton == null) {
+      console.warn("Cannot initialize: No element with class btn-buy");
+      return;
+    }
     if (!window.buyButtonStateSynchronizerActions) {
       window.buyButtonStateSynchronizerActions = {};
     }
@@ -107,12 +116,14 @@ export default class BuyButtonStateSynchronizer extends Plugin {
     setTimeout(this.buyButtonNodeChanged.bind(this));
 
     if (this.options.showDialogInsteadOfDisableButton) {
-      this.el.addEventListener("click", this.onBuyButtonClicked.bind(this));
-      this.el.disabled = false;
+      this.buyButton.addEventListener(
+        "click",
+        this.onBuyButtonClicked.bind(this)
+      );
+      this.buyButton.disabled = false;
     }
 
     // Prevent form submit by pressing enter if buy button is disabled
-    const buyForm = document.getElementById("productDetailPageBuyProductForm");
     buyForm.addEventListener("keydown", (event) => {
       if (event.code == "Enter" || event.code == "NumpadEnter") {
         return this.onBuyButtonClicked(event);
@@ -126,15 +137,14 @@ export default class BuyButtonStateSynchronizer extends Plugin {
       // stop observing attribute changes...
       this.stopObservingBuyButtonAttributeChanges();
       // ...otherwise this line would cause an infinite loop...
-      this.el.disabled = this.isDisabled;
+      this.buyButton.disabled = this.isDisabled;
       // ...start observing again
       this.startObservingBuyButtonAttributeChanges();
     }
   }
 
   startObservingBuyButtonAttributeChanges() {
-    // this.el is the element on which this plugin was initialized -> the buy button
-    this.buyButtonObserver.observe(this.el, { attributes: true });
+    this.buyButtonObserver.observe(this.buyButton, { attributes: true });
   }
 
   stopObservingBuyButtonAttributeChanges() {
@@ -142,7 +152,7 @@ export default class BuyButtonStateSynchronizer extends Plugin {
   }
 
   isBuyButtonDisabled() {
-    for (let attribute of this.el.attributes) {
+    for (let attribute of this.buyButton.attributes) {
       if (attribute.name.endsWith("-buy-button-disabled")) {
         return true;
       }
