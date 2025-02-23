@@ -1,6 +1,6 @@
 {
     "name": "codebarista/buybuttonstatesynchronizer",
-    "version": "3.1.0",
+    "version": "4.0.0",
     "description": "Allows multiple plugins to control the buy button state.",
     "type": "shopware-platform-plugin",
     "license": "MIT",
@@ -11,9 +11,9 @@
       }
     ],
     "require": {
-      "shopware/core": "6.5.*",
-      "shopware/administration": "6.5.*",
-      "shopware/storefront": "6.5.*"
+      "shopware/core": "6.6.*",
+      "shopware/administration": "6.6.*",
+      "shopware/storefront": "6.6.*"
     },
     "autoload": {
         "psr-4": {
